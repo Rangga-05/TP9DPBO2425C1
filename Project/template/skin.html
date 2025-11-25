@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Daftar Pembalap</title>
+  <style>
+    /* Definisi variabel warna */
+    :root {
+        --maroon: #800000;
+        --maroon-light: #fff0f0;
+        --maroon-hover: #5c0000;
+        --text-main: #1a1a1a;
+        --text-white: #ffffff;
+        --border: #e0e0e0;
+        --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    /* Gaya Dasar Body dan Font */
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #ffffff;
+        color: var(--text-main);
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Pembungkus Konten Utama (Membatasi lebar, di tengah) */
+    .container {
+        max-width: 1100px;
+        margin: 40px auto;
+        padding: 0 20px;
+    }
+
+    /* Gaya Kartu/Panel Konten */
+    .card {
+        background: #ffffff;
+        box-shadow: 0 0 0 1px rgba(0,0,0,0.05), var(--shadow); 
+        border-radius: 10px;
+        padding: 30px;
+    }
+
+    /* Gaya Judul Halaman (H1) */
+    h1 {
+        font-size: 26px;
+        font-weight: 800;
+        margin: 0 0 25px 0;
+        color: var(--maroon);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-left: 5px solid var(--maroon);
+        padding-left: 15px;
+    }
+
+    /* Gaya Navigasi Tab (Pembalap | Mobil) */
+    .nav-tabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 25px;
+        border-bottom: 2px solid var(--maroon);
+        padding-bottom: 10px;
+    }
+
+    /* Gaya Link Navigasi */
+    .nav-link {
+        text-decoration: none;
+        color: #666;
+        padding: 8px 20px;
+        border-radius: 4px;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    .nav-link:hover {
+        color: var(--maroon);
+        background: var(--maroon-light);
+    }
+
+    /* Gaya Link Navigasi yang Aktif */
+    .nav-link.active {
+        background: var(--maroon);
+        color: white;
+    }
+
+    /* Gaya Tabel */
+    .table-responsive {
+        overflow-x: auto;
+        border-radius: 8px 8px 0 0;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+    }
+
+    /* Gaya Header Tabel (<thead>) */
+    thead th {
+        background-color: var(--maroon);
+        color: var(--text-white);
+        text-transform: uppercase;
+        font-size: 12px;
+        padding: 15px;
+        text-align: left;
+        letter-spacing: 0.5px;
+    }
+
+    /* Gaya Baris dan Sel Data Tabel (<tbody>) */
+    tbody td {
+        padding: 12px 15px;
+        border-bottom: 1px solid var(--border);
+        font-weight: 500;
+    }
+
+    /* Zebra Striping (Selang-seling warna baris) dan Efek Hover */
+    tbody tr:nth-child(even) {
+        background-color: var(--maroon-light);
+    }
+    tbody tr:nth-child(odd) {
+        background-color: #ffffff;
+    }
+
+    tbody tr:hover {
+        background-color: #ffe6e6;
+    }
+
+     /* Gaya Tombol Aksi Umum (.btn) */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 16px;
+        border-radius: 4px;
+        font-size: 13px;
+        font-weight: 700;
+        text-decoration: none;
+        cursor: pointer;
+        border: none;
+        transition: 0.2s;
+    }
+
+    /* Gaya Tombol Utama (Primary) */
+    .btn-primary {
+        background-color: var(--maroon);
+        color: white;
+    }
+    .btn-primary:hover {
+        background-color: var(--maroon-hover);
+        box-shadow: 0 2px 4px rgba(128, 0, 0, 0.3);
+    }
+
+    /* Pengelompokan Tombol Aksi dalam Baris Tabel */
+    .action-group { display: flex; gap: 5px; }
+    .btn-sm { padding: 5px 10px; font-size: 11px; text-transform: uppercase; }
+
+    /* Pengelompokan Tombol Aksi dalam Baris Tabel */
+    .btn-edit {
+        background-color: #ffffff;
+        color: var(--maroon);
+        border: 1px solid var(--maroon);
+    }
+    .btn-edit:hover {
+        background-color: var(--maroon);
+        color: white;
+    }
+
+    /* Gaya Tombol Delete */
+    .btn-delete {
+        background-color: #ffcccc;
+        color: #cc0000;
+        border: 1px solid #ff9999;
+    }
+    .btn-delete:hover {
+        background-color: #cc0000;
+        color: white;
+    }
+
+    /* Gaya Footer Card (Total dan Tombol Tambah) */
+    .card-footer {
+        margin-top: 20px;
+        padding-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 2px solid #f0f0f0;
+    }
+    .total-info { font-weight: bold; color: var(--maroon); }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Dashboard Data Pembalap Dan Mobil</h1>
+
+      <div class="nav-tabs">
+        <a href="index.php" class="nav-link active">PEMBALAP</a>
+        <a href="index.php?nav=mobil" class="nav-link">MOBIL</a>
+      </div>
+
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th width="50">No</th>
+              <th>Nama</th>
+              <th>Tim</th>
+              <th>Negara</th>
+              <th>Poin</th>
+              <th>Menang</th>
+              <th width="140">Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            DATA_TABEL
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card-footer">
+        <div class="total-info">TOTAL: DATA_TOTAL PEMBALAP</div>
+        <a href="index.php?screen=add" class="btn btn-primary" id="btn-add">+ TAMBAH PEMBALAP</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* Logika JavaScript untuk Konfirmasi dan Submit Delete Data */
+    document.querySelectorAll(".btn-delete").forEach(btn => {
+        btn.addEventListener("click", function(){
+            var id = this.getAttribute('data-id');
+            if(confirm('Yakin ingin menghapus entri #' + id + '?')){
+                // Membuat Form tersembunyi untuk POST request ke 'index.php' dengan 'action=delete'
+                var form = document.createElement('form'); form.method = 'POST'; form.action = 'index.php';
+                var a = document.createElement('input'); a.type = 'hidden'; a.name = 'action'; a.value = 'delete';
+                var i = document.createElement('input'); i.type = 'hidden'; i.name = 'id'; i.value = id;
+                form.appendChild(a); form.appendChild(i); document.body.appendChild(form); form.submit();
+            }
+        });
+    });
+  </script>
+</body>
+</html>

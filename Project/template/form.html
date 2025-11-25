@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Form Pembalap</title>
+  <style>
+    /* Variabel Warna dan Gaya Dasar (Maroon, Shadow, Background) */
+    :root {
+        --maroon: #800000;
+        --maroon-hover: #5c0000;
+        --bg-body: #f8f9fa;
+        --bg-card: #ffffff;
+        --text-main: #1a1a1a;
+        --text-muted: #666;
+        --border: #ddd;
+        --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    * { box-sizing: border-box; }
+
+    /* Gaya Dasar Body */
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background-color: var(--bg-body);
+        color: var(--text-main);
+        margin: 0;
+        padding: 0;
+        line-height: 1.5;
+    }
+
+    /* Pembungkus Konten (Membatasi lebar formulir) */
+    .container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+    }
+
+    /* Gaya Kartu/Panel Formulir */
+    .card {
+        background: var(--bg-card);
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+        padding: 30px;
+        border-top: 5px solid var(--maroon);
+    }
+
+    /* Gaya Judul Formulir */
+    h1 {
+        font-size: 22px;
+        font-weight: 800;
+        margin: 0 0 25px 0;
+        color: var(--maroon);
+        text-transform: uppercase;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 15px;
+    }
+
+    /* Pengaturan Grid untuk Layout Form (2 Kolom) */
+    form { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    
+    /* Gaya Label Input */
+    label {
+        display: block;
+        font-size: 13px;
+        font-weight: 800;
+        color: var(--maroon);
+        margin-bottom: 5px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    /* Gaya Input Teks dan Angka */
+    input[type="text"], input[type="number"] {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        font-size: 14px;
+        transition: 0.3s;
+    }
+
+    /* Efek Fokus pada Input */
+    input:focus {
+        outline: none;
+        border-color: var(--maroon);
+        box-shadow: 0 0 0 3px rgba(128, 0, 0, 0.1);
+    }
+
+    /* Memaksa elemen mengambil lebar penuh (dua kolom) */
+    .full { grid-column: 1 / -1; }
+
+    /* Grup Tombol Aksi (Simpan & Batal) */
+    .actions {
+        grid-column: 1 / -1;
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+        margin-top: 15px;
+        padding-top: 20px;
+        border-top: 1px solid #eee;
+    }
+
+    /* Gaya Tombol Umum */
+    .btn {
+        padding: 10px 20px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        text-decoration: none;
+        border: 1px solid transparent;
+        transition: 0.2s;
+    }
+
+    /* Gaya Tombol Utama (SIMPAN) */
+    .btn-primary {
+        background: var(--maroon);
+        color: #fff;
+    }
+    .btn-primary:hover {
+        background: var(--maroon-hover);
+    }
+
+    /* Gaya Tombol Sekunder (BATAL) */
+    .btn-muted {
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--text-muted);
+    }
+    .btn-muted:hover {
+        background: #eee;
+        color: var(--text-main);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Form Pembalap</h1>
+      <form method="post" action="index.php">
+        <input type="hidden" name="action" value="add" id="pembalap-action">
+        <input type="hidden" name="id" value="" id="pembalap-id">
+
+        <div>
+          <label for="nama">Nama</label>
+          <input id="nama" name="nama" type="text" placeholder="Nama Pembalap" required>
+        </div>
+
+        <div>
+          <label for="tim">Tim</label>
+          <input id="tim" name="tim" type="text" placeholder="Nama Tim" required>
+        </div>
+
+        <div>
+          <label for="negara">Negara</label>
+          <input id="negara" name="negara" type="text" placeholder="Asal Negara">
+        </div>
+
+        <div>
+          <label for="poinMusim">Poin Musim</label>
+          <input id="poinMusim" name="poinMusim" type="number" min="0" placeholder="0">
+        </div>
+
+        <div class="full">
+          <label for="jumlahMenang">Jumlah Menang</label>
+          <input id="jumlahMenang" name="jumlahMenang" type="number" min="0" placeholder="0">
+        </div>
+
+        <div class="actions">
+          <a href="index.php" class="btn btn-muted">BATAL</a>
+          <button type="submit" class="btn btn-primary">SIMPAN</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
